@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkSearch — Investor Deck</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #060d08;
+    color: #E8F2E8;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,26,16,0.92);
+    border-bottom: 1px solid rgba(82,183,136,0.15);
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    backdrop-filter: blur(16px);
+  }
+  .nav-logo { font-size: 16px; font-weight: 800; color: #52B788; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .nav-links a {
+    font-size: 11px; font-weight: 600; color: rgba(232,242,232,0.45);
+    text-decoration: none; padding: 5px 10px; border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .nav-links a:hover { color: #52B788; background: rgba(82,183,136,0.10); }
+
+  /* SLIDE LAYOUT */
+  .slide {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 100px 40px 60px;
+    position: relative; overflow: hidden;
+  }
+  .slide-inner { max-width: 1000px; width: 100%; }
+
+  /* BACKGROUNDS */
+  .bg-dark { background: #0D1A10; }
+  .bg-darker { background: #090f0b; }
+  .bg-hero { background: radial-gradient(ellipse at 30% 40%, rgba(82,183,136,0.12) 0%, transparent 60%), #0D1A10; }
+
+  /* ORB DECORATIONS */
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(70px); pointer-events: none;
+  }
+
+  /* LABELS */
+  .slide-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 14px; border-radius: 20px;
+    background: rgba(82,183,136,0.10); border: 1px solid rgba(82,183,136,0.25);
+    font-size: 10px; font-weight: 700; color: #52B788;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px;
+  }
+  .slide-label .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #52B788;
+    box-shadow: 0 0 8px #52B788;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.8); } }
+
+  /* TYPOGRAPHY */
+  h1 { font-size: clamp(38px, 5vw, 64px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 18px; }
+  h2 { font-size: clamp(28px, 3vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 14px; }
+  h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  p  { font-size: 15px; line-height: 1.7; color: rgba(232,242,232,0.55); }
+
+  .grad {
+    background: linear-gradient(135deg, #52B788 0%, #74C0FC 55%, #DA77F2 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  /* CARDS */
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px; padding: 24px;
+    backdrop-filter: blur(12px);
+  }
+  .card-green  { border-color: rgba(82,183,136,0.25); }
+  .card-blue   { border-color: rgba(116,192,252,0.25); }
+  .card-purple { border-color: rgba(218,119,242,0.25); }
+  .card-yellow { border-color: rgba(255,212,59,0.25); }
+  .card-orange { border-color: rgba(244,162,97,0.25); }
+
+  /* GRIDS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 48px; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, #52B788, #74C0FC);
+    margin-bottom: 24px;
+  }
+
+  /* STAT BIG */
+  .stat-big { font-size: 48px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+
+  /* FEATURE ICON */
+  .feat-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 14px; flex-shrink: 0;
+  }
+
+  /* SOURCE TAG */
+  .src-tag {
+    font-size: 10px; font-weight: 600; padding: 4px 10px;
+    border-radius: 20px; letter-spacing: 0.03em;
+  }
+
+  /* ======================== MOCKUP COMPONENTS ======================== */
+  .mockup-wrap {
+    background: #090f0b;
+    border: 1px solid rgba(82,183,136,0.20);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(82,183,136,0.08);
+  }
+  .mockup-bar {
+    background: rgba(13,26,16,0.95);
+    border-bottom: 1px solid rgba(82,183,136,0.12);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .mockup-body { padding: 18px; }
+
+  /* PROCESS STEP */
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(82,183,136,0.15); border: 1px solid rgba(82,183,136,0.35);
+    color: #52B788; font-size: 14px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* CHECK ITEM */
+  .check-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+  .check-icon { color: #52B788; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* SLIDE NUMBER */
+  .slide-num {
+    position: absolute; bottom: 24px; right: 32px;
+    font-size: 10px; font-weight: 700; color: rgba(232,242,232,0.15);
+    letter-spacing: 0.10em; text-transform: uppercase;
+  }
+
+  /* PROGRESS BAR */
+  .prog-bar { height: 6px; border-radius: 4px; background: rgba(255,255,255,0.06); overflow: hidden; margin-top: 8px; }
+  .prog-fill { height: 100%; border-radius: 4px; }
+
+  /* CTA BUTTON */
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 12px;
+    background: linear-gradient(135deg, #52B788, #3d8f68);
+    color: #fff; font-size: 14px; font-weight: 700;
+    text-decoration: none; border: none; cursor: pointer;
+    letter-spacing: 0.02em;
+  }
+
+  /* SECTION SEPARATOR */
+  .sep {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(82,183,136,0.20), transparent);
+    margin: 60px 0;
+  }
+
+  /* PRINT / EXPORT */
+  @media print {
+    .nav { display: none !important; }
+    .slide { page-break-after: always; min-height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">WorkSearch</div>
+  <div class="nav-links">
+    <a href="#problem">Problem</a>
+    <a href="#solution">Solution</a>
+    <a href="#product">Product</a>
+    <a href="#howit">How It Works</a>
+    <a href="#model">Business Model</a>
+    <a href="#market">Market</a>
+    <a href="#tech">Tech</a>
+    <a href="#ask">The Ask</a>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1 — HERO -->
+<!-- ============================================================ -->
+<section class="slide bg-hero" id="hero">
+  <div class="orb" style="width:600px;height:600px;top:-160px;left:-200px;background:rgba(82,183,136,0.12);"></div>
+  <div class="orb" style="width:350px;height:350px;bottom:0;right:-100px;background:rgba(116,192,252,0.08);"></div>
+  <div class="orb" style="width:200px;height:200px;top:40%;left:60%;background:rgba(218,119,242,0.07);"></div>
+
+  <div class="slide-inner" style="text-align:center;">
+    <div class="slide-label" style="margin:0 auto 24px;">
+      <span class="dot"></span> Investor Presentation · 2026
+    </div>
+
+    <h1>
+      The <span class="grad">AI-Powered</span><br>Job Search Engine
+    </h1>
+
+    <p style="max-width:540px;margin:0 auto 40px;font-size:17px;">
+      WorkSearch aggregates 10 live job sources, scores every listing against your resume using AI, and gives job seekers an unfair advantage — in one seamless platform.
+    </p>
+
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <div style="background:rgba(82,183,136,0.10);border:1px solid rgba(82,183,136,0.25);border-radius:12px;padding:16px 28px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:#52B788;">10+</div>
+        <div style="font-size:11px;color:rgba(232,242,232,0.45);margin-top:3px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Job Sources</div>
+      </div>
+      <div style="background:rgba(116,192,252,0.10);border:1px solid rgba(116,192,252,0.25);border-radius:12px;padding:16px 28px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:#74C0FC;">AI</div>
+        <div style="font-size:11px;color:rgba(232,242,232,0.45);margin-top:3px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Resume Matching</div>
+      </div>
+      <div style="background:rgba(218,119,242,0.10);border:1px solid rgba(218,119,242,0.25);border-radius:12px;padding:16px 28px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:#DA77F2;">Pro</div>
+        <div style="font-size:11px;color:rgba(232,242,232,0.45);margin-top:3px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">$11.99 / month</div>
+      </div>
+    </div>
+
+    <!-- mini mockup preview -->
+    <div style="margin-top:48px;">
+      <div class="mockup-wrap" style="max-width:720px;margin:0 auto;">
+        <div class="mockup-bar">
+          <div class="mockup-dot" style="background:#ff5f57;"></div>
+          <div class="mockup-dot" style="background:#febc2e;"></div>
+          <div class="mockup-dot" style="background:#28c840;"></div>
+          <div style="flex:1;text-align:center;font-size:11px;color:rgba(232,242,232,0.25);font-weight:600;">worksearch.app/dashboard</div>
+        </div>
+        <div class="mockup-body">
+          <!-- Simulated dashboard -->
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+            <div style="background:rgba(82,183,136,0.15);border:1px solid rgba(82,183,136,0.25);border-radius:20px;padding:4px 12px;font-size:10px;color:#52B788;font-weight:700;letter-spacing:0.10em;">● LIVE DASHBOARD</div>
+            <div style="background:rgba(218,119,242,0.12);border:1px solid rgba(218,119,242,0.25);border-radius:20px;padding:4px 10px;font-size:10px;color:#DA77F2;font-weight:700;letter-spacing:0.10em;">✦ PRO MEMBER</div>
+          </div>
+          <div style="font-size:22px;font-weight:900;color:#E8F2E8;margin-bottom:16px;">Hey, <span class="grad">Anurag</span> 👋</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+            <div style="background:rgba(116,192,252,0.08);border:1px solid rgba(116,192,252,0.20);border-radius:12px;padding:14px;">
+              <div style="font-size:22px;font-weight:800;color:#74C0FC;">247</div>
+              <div style="font-size:11px;color:#E8F2E8;font-weight:600;margin-top:4px;">Jobs Found</div>
+              <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:2px;">From last search</div>
+            </div>
+            <div style="background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.20);border-radius:12px;padding:14px;">
+              <div style="font-size:22px;font-weight:800;color:#52B788;">18</div>
+              <div style="font-size:11px;color:#E8F2E8;font-weight:600;margin-top:4px;">Saved Jobs</div>
+              <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:2px;">Bookmarked</div>
+            </div>
+            <div style="background:rgba(218,119,242,0.08);border:1px solid rgba(218,119,242,0.20);border-radius:12px;padding:14px;">
+              <div style="font-size:22px;font-weight:800;color:#DA77F2;">7</div>
+              <div style="font-size:11px;color:#E8F2E8;font-weight:600;margin-top:4px;">Applied</div>
+              <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:2px;">Tracked</div>
+            </div>
+            <div style="background:rgba(255,212,59,0.08);border:1px solid rgba(255,212,59,0.20);border-radius:12px;padding:14px;">
+              <div style="font-size:22px;font-weight:800;color:#FFD43B;">87</div>
+              <div style="font-size:11px;color:#E8F2E8;font-weight:600;margin-top:4px;">ATS Score</div>
+              <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:2px;">Engineering</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">01 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2 — THE PROBLEM -->
+<!-- ============================================================ -->
+<section class="slide bg-darker" id="problem">
+  <div class="orb" style="width:400px;height:400px;top:-80px;right:-100px;background:rgba(244,162,97,0.07);"></div>
+  <div class="slide-inner">
+    <div class="slide-label"><span class="dot"></span> The Problem</div>
+    <h2>Job searching is<br><span class="grad">broken</span> for candidates</h2>
+    <p style="max-width:520px;margin-bottom:40px;">The modern job hunt wastes hundreds of hours. Candidates juggle a dozen tabs, send generic resumes, and get ghosted — with no feedback and no data.</p>
+
+    <div class="grid-3" style="margin-bottom:32px;">
+      <div class="card" style="border-color:rgba(244,162,97,0.25);">
+        <div style="font-size:36px;margin-bottom:12px;">🗂️</div>
+        <h3 style="color:#F4A261;">Fragmented Sources</h3>
+        <p style="font-size:13px;">LinkedIn, Greenhouse, Ashby, Lever — candidates manually check 10+ sites daily. No unified search exists for most job seekers.</p>
+      </div>
+      <div class="card" style="border-color:rgba(249,135,197,0.25);">
+        <div style="font-size:36px;margin-bottom:12px;">📄</div>
+        <h3 style="color:#F987C5;">Zero Personalization</h3>
+        <p style="font-size:13px;">Generic job boards can't match a resume to a listing. Candidates apply blindly, wasting time on jobs they're underqualified or overqualified for.</p>
+      </div>
+      <div class="card" style="border-color:rgba(116,192,252,0.25);">
+        <div style="font-size:36px;margin-bottom:12px;">🤖</div>
+        <h3 style="color:#74C0FC;">ATS Black Box</h3>
+        <p style="font-size:13px;">Applicant Tracking Systems reject 75% of resumes automatically. Candidates have no visibility into why they're screened out.</p>
+      </div>
+    </div>
+
+    <div style="background:rgba(244,162,97,0.07);border:1px solid rgba(244,162,97,0.20);border-radius:16px;padding:24px;display:flex;gap:32px;flex-wrap:wrap;">
+      <div style="text-align:center;flex:1;min-width:120px;">
+        <div class="stat-big" style="color:#F4A261;">250+</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Avg. Applications<br>per Job Offer</div>
+      </div>
+      <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
+      <div style="text-align:center;flex:1;min-width:120px;">
+        <div class="stat-big" style="color:#F987C5;">75%</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Resumes Rejected<br>by ATS Before HR</div>
+      </div>
+      <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
+      <div style="text-align:center;flex:1;min-width:120px;">
+        <div class="stat-big" style="color:#74C0FC;">100h</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Avg. Time Spent<br>per Job Search</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">02 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3 — THE SOLUTION -->
+<!-- ============================================================ -->
+<section class="slide bg-dark" id="solution">
+  <div class="orb" style="width:500px;height:500px;top:-100px;left:-150px;background:rgba(82,183,136,0.10);"></div>
+  <div class="slide-inner">
+    <div class="slide-label"><span class="dot"></span> The Solution</div>
+    <h2>WorkSearch: Your<br><span class="grad">AI Job Search Copilot</span></h2>
+    <p style="max-width:560px;margin-bottom:40px;">Upload your resume once. WorkSearch scans 10 live job platforms, scores every result against your profile using AI, and gives you an intelligent pipeline to manage your entire search.</p>
+
+    <div class="grid-2" style="gap:20px;align-items:start;">
+      <div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="card card-green" style="display:flex;gap:14px;align-items:flex-start;">
+            <div class="feat-icon" style="background:rgba(82,183,136,0.15);border:1px solid rgba(82,183,136,0.30);">🔍</div>
+            <div>
+              <h3 style="color:#52B788;">Unified Job Search</h3>
+              <p style="font-size:13px;">One search across LinkedIn, Greenhouse, Ashby, Lever, WeWorkRemotely, RemoteOK, HN Hiring, Himalayas, and more — updated live.</p>
+            </div>
+          </div>
+          <div class="card card-blue" style="display:flex;gap:14px;align-items:flex-start;">
+            <div class="feat-icon" style="background:rgba(116,192,252,0.15);border:1px solid rgba(116,192,252,0.30);">🧠</div>
+            <div>
+              <h3 style="color:#74C0FC;">AI Resume Matching</h3>
+              <p style="font-size:13px;">Embedding-based semantic matching scores every job against your resume. You see the top matches, not just keyword hits.</p>
+            </div>
+          </div>
+          <div class="card card-purple" style="display:flex;gap:14px;align-items:flex-start;">
+            <div class="feat-icon" style="background:rgba(218,119,242,0.15);border:1px solid rgba(218,119,242,0.30);">⚡</div>
+            <div>
+              <h3 style="color:#DA77F2;">End-to-End Toolkit</h3>
+              <p style="font-size:13px;">Resume tailoring, cover letter generation, ATS scoring, and an application pipeline — everything a job seeker needs in one place.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search mockup -->
+      <div class="mockup-wrap">
+        <div class="mockup-bar">
+          <div class="mockup-dot" style="background:#ff5f57;"></div>
+          <div class="mockup-dot" style="background:#febc2e;"></div>
+          <div class="mockup-dot" style="background:#28c840;"></div>
+          <div style="flex:1;text-align:center;font-size:10px;color:rgba(232,242,232,0.20);font-weight:600;">Results · Live Search</div>
+        </div>
+        <div class="mockup-body">
+          <!-- job results -->
+          <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+            <span class="src-tag" style="background:rgba(10,102,194,0.15);border:1px solid rgba(10,102,194,0.30);color:#5EB3F0;">LinkedIn</span>
+            <span class="src-tag" style="background:rgba(82,183,136,0.12);border:1px solid rgba(82,183,136,0.25);color:#52B788;">Greenhouse</span>
+            <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">Ashby</span>
+            <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">Lever</span>
+            <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">+6 more</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <!-- Job card 1 -->
+            <div style="background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.18);border-radius:12px;padding:13px;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:#E8F2E8;">Senior Software Engineer</div>
+                  <div style="font-size:11px;color:rgba(232,242,232,0.40);margin-top:2px;">Stripe · San Francisco, CA</div>
+                </div>
+                <div style="background:rgba(82,183,136,0.20);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;color:#52B788;">94% Match</div>
+              </div>
+              <div class="prog-bar"><div class="prog-fill" style="width:94%;background:linear-gradient(90deg,#52B788,#74C0FC);"></div></div>
+            </div>
+            <!-- Job card 2 -->
+            <div style="background:rgba(116,192,252,0.05);border:1px solid rgba(116,192,252,0.15);border-radius:12px;padding:13px;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:#E8F2E8;">Full Stack Engineer</div>
+                  <div style="font-size:11px;color:rgba(232,242,232,0.40);margin-top:2px;">Notion · Remote</div>
+                </div>
+                <div style="background:rgba(116,192,252,0.20);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;color:#74C0FC;">88% Match</div>
+              </div>
+              <div class="prog-bar"><div class="prog-fill" style="width:88%;background:linear-gradient(90deg,#74C0FC,#63E6BE);"></div></div>
+            </div>
+            <!-- Job card 3 -->
+            <div style="background:rgba(244,162,97,0.05);border:1px solid rgba(244,162,97,0.15);border-radius:12px;padding:13px;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:#E8F2E8;">Backend Engineer, Infrastructure</div>
+                  <div style="font-size:11px;color:rgba(232,242,232,0.40);margin-top:2px;">Linear · Remote · Visa ✓</div>
+                </div>
+                <div style="background:rgba(244,162,97,0.18);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;color:#F4A261;">81% Match</div>
+              </div>
+              <div class="prog-bar"><div class="prog-fill" style="width:81%;background:linear-gradient(90deg,#F4A261,#FFD43B);"></div></div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:12px;font-size:10px;color:rgba(232,242,232,0.20);font-weight:600;letter-spacing:0.06em;">247 JOBS FOUND · SORTED BY AI MATCH</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">03 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4 — PRODUCT FEATURES -->
+<!-- ============================================================ -->
+<section class="slide bg-darker" id="product">
+  <div class="orb" style="width:450px;height:450px;bottom:-100px;right:-100px;background:rgba(218,119,242,0.07);"></div>
+  <div class="slide-inner">
+    <div class="slide-label"><span class="dot"></span> Product Features</div>
+    <h2>A complete <span class="grad">job search OS</span></h2>
+    <p style="margin-bottom:36px;max-width:500px;">Six powerful tools covering every stage of the job search — from discovery to application to offer.</p>
+
+    <div class="grid-3" style="margin-bottom:20px;">
+      <div class="card card-blue">
+        <div class="feat-icon" style="background:rgba(116,192,252,0.12);border:1px solid rgba(116,192,252,0.25);margin-bottom:12px;">
+          <span style="font-size:18px;">🔎</span>
+        </div>
+        <h3 style="color:#74C0FC;font-size:15px;">AI Job Search</h3>
+        <p style="font-size:12px;margin-top:6px;">Search across 10 live sources simultaneously. Filter by visa sponsorship. Real-time streaming results.</p>
+        <div style="margin-top:12px;">
+          <span class="badge" style="background:rgba(116,192,252,0.10);border:1px solid rgba(116,192,252,0.20);color:#74C0FC;font-size:10px;">Free</span>
+        </div>
+      </div>
+      <div class="card card-purple">
+        <div class="feat-icon" style="background:rgba(218,119,242,0.12);border:1px solid rgba(218,119,242,0.25);margin-bottom:12px;">
+          <span style="font-size:18px;">📊</span>
+        </div>
+        <h3 style="color:#DA77F2;font-size:15px;">AI Match Scoring</h3>
+        <p style="font-size:12px;margin-top:6px;">Semantic embedding model scores every listing against your resume. Know exactly how well you fit before applying.</p>
+        <div style="margin-top:12px;">
+          <span class="badge" style="background:rgba(218,119,242,0.10);border:1px solid rgba(218,119,242,0.20);color:#DA77F2;font-size:10px;">Pro</span>
+        </div>
+      </div>
+      <div class="card card-green">
+        <div class="feat-icon" style="background:rgba(82,183,136,0.12);border:1px solid rgba(82,183,136,0.25);margin-bottom:12px;">
+          <span style="font-size:18px;">📄</span>
+        </div>
+        <h3 style="color:#52B788;font-size:15px;">Resume Tailoring</h3>
+        <p style="font-size:12px;margin-top:6px;">AI rewrites your resume to target a specific job description. Export as LaTeX-formatted PDF instantly.</p>
+        <div style="margin-top:12px;">
+          <span class="badge" style="background:rgba(218,119,242,0.10);border:1px solid rgba(218,119,242,0.20);color:#DA77F2;font-size:10px;">Pro</span>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(249,135,197,0.25);">
+        <div class="feat-icon" style="background:rgba(249,135,197,0.12);border:1px solid rgba(249,135,197,0.25);margin-bottom:12px;">
+          <span style="font-size:18px;">✉️</span>
+        </div>
+        <h3 style="color:#F987C5;font-size:15px;">Cover Letter Generator</h3>
+        <p style="font-size:12px;margin-top:6px;">Generate a tailored, professional cover letter for any job in seconds — personalized to the role and company.</p>
+        <div style="margin-top:12px;">
+          <span class="badge" style="background:rgba(218,119,242,0.10);border:1px solid rgba(218,119,242,0.20);color:#DA77F2;font-size:10px;">Pro</span>
+        </div>
+      </div>
+      <div class="card card-yellow">
+        <div class="feat-icon" style="background:rgba(255,212,59,0.12);border:1px solid rgba(255,212,59,0.25);margin-bottom:12px;">
+          <span style="font-size:18px;">🎯</span>
+        </div>
+        <h3 style="color:#FFD43B;font-size:15px;">ATS Score Optimizer</h3>
+        <p style="font-size:12px;margin-top:6px;">LLM analyzes your resume vs any job description. Gives a score + specific keyword and format improvement tips.</p>
+        <div style="margin-top:12px;">
+          <span class="badge" style="background:rgba(218,119,242,0.10);border:1px solid rgba(218,119,242,0.20);color:#DA77F2;font-size:10px;">Pro</span>
+        </div>
+      </div>
+      <div class="card card-orange">
+        <div class="feat-icon" style="background:rgba(244,162,97,0.12);border:1px solid rgba(244,162,97,0.25);margin-bottom:12px;">
+          <span style="font-size:18px;">📋</span>
+        </div>
+        <h3 style="color:#F4A261;font-size:15px;">Application Pipeline</h3>
+        <p style="font-size:12px;margin-top:6px;">Kanban-style tracker for every application. Save, apply, track — never lose track of where you stand.</p>
+        <div style="margin-top:12px;">
+          <span class="badge" style="background:rgba(116,192,252,0.10);border:1px solid rgba(116,192,252,0.20);color:#74C0FC;font-size:10px;">Free</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATS mockup snippet -->
+    <div class="mockup-wrap" style="max-width:680px;margin:0 auto;">
+      <div class="mockup-bar">
+        <div class="mockup-dot" style="background:#ff5f57;"></div>
+        <div class="mockup-dot" style="background:#febc2e;"></div>
+        <div class="mockup-dot" style="background:#28c840;"></div>
+        <div style="flex:1;text-align:center;font-size:10px;color:rgba(232,242,232,0.20);font-weight:600;">ATS Score Optimizer</div>
+      </div>
+      <div class="mockup-body">
+        <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px;align-items:center;">
+          <div style="text-align:center;background:rgba(82,183,136,0.07);border:1px solid rgba(82,183,136,0.20);border-radius:12px;padding:18px;">
+            <div style="font-size:48px;font-weight:900;color:#52B788;line-height:1;">87</div>
+            <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">ATS Score</div>
+            <div style="margin-top:10px;">
+              <div class="prog-bar" style="height:8px;"><div class="prog-fill" style="width:87%;background:linear-gradient(90deg,#52B788,#74C0FC);"></div></div>
+            </div>
+            <div style="font-size:10px;color:#52B788;margin-top:8px;font-weight:700;">Engineering · Strong Match</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div style="font-size:12px;color:rgba(232,242,232,0.60);">Keywords aligned: Python, FastAPI, React, PostgreSQL</div>
+            </div>
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div style="font-size:12px;color:rgba(232,242,232,0.60);">Experience level matches Senior role requirements</div>
+            </div>
+            <div class="check-item">
+              <span style="color:#FFD43B;font-size:16px;flex-shrink:0;">!</span>
+              <div style="font-size:12px;color:rgba(232,242,232,0.60);">Add "distributed systems" to skills section</div>
+            </div>
+            <div class="check-item">
+              <span style="color:#FFD43B;font-size:16px;flex-shrink:0;">!</span>
+              <div style="font-size:12px;color:rgba(232,242,232,0.60);">Quantify impact in 2 bullet points with metrics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">04 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5 — HOW IT WORKS -->
+<!-- ============================================================ -->
+<section class="slide bg-dark" id="howit">
+  <div class="orb" style="width:380px;height:380px;top:-60px;left:-100px;background:rgba(74,144,104,0.10);"></div>
+  <div class="slide-inner">
+    <div class="slide-label"><span class="dot"></span> How It Works</div>
+    <h2>From resume to<br><span class="grad">matched interviews</span></h2>
+    <p style="max-width:500px;margin-bottom:44px;">WorkSearch condenses weeks of manual searching into a smart, personalized pipeline in minutes.</p>
+
+    <div style="position:relative;">
+      <!-- Connecting line -->
+      <div style="position:absolute;left:18px;top:36px;bottom:36px;width:2px;background:linear-gradient(180deg,#52B788,#74C0FC,#DA77F2,#FFD43B);border-radius:2px;"></div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;padding-left:52px;">
+        <div style="display:flex;gap:20px;align-items:flex-start;">
+          <div class="step-num" style="position:absolute;left:0;">1</div>
+          <div style="flex:1;background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.18);border-radius:14px;padding:20px 24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;">
+            <div>
+              <h3 style="color:#52B788;">Upload Your Resume</h3>
+              <p style="font-size:13px;">Upload a PDF or paste your resume. Our AI parses it — extracting skills, experience, education, and domain — in seconds.</p>
+            </div>
+            <div style="background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.15);border-radius:10px;padding:14px;font-size:11px;color:rgba(232,242,232,0.50);">
+              <div style="color:#52B788;font-weight:700;margin-bottom:6px;">Parsed: Resume.pdf</div>
+              <div>✓ Skills: Python, React, SQL</div>
+              <div>✓ Experience: 4 years SWE</div>
+              <div>✓ Domain: Engineering</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:20px;align-items:flex-start;">
+          <div class="step-num" style="position:absolute;left:0;background:rgba(116,192,252,0.15);border-color:rgba(116,192,252,0.35);color:#74C0FC;">2</div>
+          <div style="flex:1;background:rgba(116,192,252,0.05);border:1px solid rgba(116,192,252,0.15);border-radius:14px;padding:20px 24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;">
+            <div>
+              <h3 style="color:#74C0FC;">AI Scans 10+ Sources</h3>
+              <p style="font-size:13px;">WorkSearch simultaneously queries LinkedIn, Greenhouse, Ashby, Lever, RemoteOK, HN Hiring, and more — pulling hundreds of live listings in real time.</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+              <span class="src-tag" style="background:rgba(10,102,194,0.15);border:1px solid rgba(10,102,194,0.25);color:#5EB3F0;">LinkedIn</span>
+              <span class="src-tag" style="background:rgba(82,183,136,0.10);border:1px solid rgba(82,183,136,0.20);color:#52B788;">Greenhouse</span>
+              <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">Ashby</span>
+              <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">Lever</span>
+              <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">RemoteOK</span>
+              <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">HN Hiring</span>
+              <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">Himalayas</span>
+              <span class="src-tag" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,242,232,0.45);">+3 more</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:20px;align-items:flex-start;">
+          <div class="step-num" style="position:absolute;left:0;background:rgba(218,119,242,0.15);border-color:rgba(218,119,242,0.35);color:#DA77F2;">3</div>
+          <div style="flex:1;background:rgba(218,119,242,0.05);border:1px solid rgba(218,119,242,0.15);border-radius:14px;padding:20px 24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;">
+            <div>
+              <h3 style="color:#DA77F2;">AI Scores & Ranks Jobs</h3>
+              <p style="font-size:13px;">Embedding-based AI ranks every job by fit with your resume. Skill extractor, domain classifier, and scoring engine work together to surface your best matches.</p>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(232,242,232,0.40);margin-bottom:4px;">
+                <span>Stripe — Senior SWE</span><span style="color:#DA77F2;">94%</span>
+              </div>
+              <div class="prog-bar" style="margin-bottom:8px;"><div class="prog-fill" style="width:94%;background:linear-gradient(90deg,#DA77F2,#74C0FC);"></div></div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(232,242,232,0.40);margin-bottom:4px;">
+                <span>Notion — Full Stack</span><span style="color:#DA77F2;">88%</span>
+              </div>
+              <div class="prog-bar" style="margin-bottom:8px;"><div class="prog-fill" style="width:88%;background:linear-gradient(90deg,#DA77F2,#74C0FC);"></div></div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(232,242,232,0.40);margin-bottom:4px;">
+                <span>Linear — Backend Eng</span><span style="color:#DA77F2;">81%</span>
+              </div>
+              <div class="prog-bar"><div class="prog-fill" style="width:81%;background:linear-gradient(90deg,#DA77F2,#74C0FC);"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:20px;align-items:flex-start;">
+          <div class="step-num" style="position:absolute;left:0;background:rgba(255,212,59,0.15);border-color:rgba(255,212,59,0.35);color:#FFD43B;">4</div>
+          <div style="flex:1;background:rgba(255,212,59,0.05);border:1px solid rgba(255,212,59,0.15);border-radius:14px;padding:20px 24px;">
+            <h3 style="color:#FFD43B;">Apply Smarter with Pro Tools</h3>
+            <p style="font-size:13px;max-width:500px;">One click: tailor your resume to the role, generate a cover letter, check your ATS score — then track your application in the pipeline. All without leaving WorkSearch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">05 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6 — BUSINESS MODEL -->
+<!-- ============================================================ -->
+<section class="slide bg-darker" id="model">
+  <div class="orb" style="width:420px;height:420px;top:-80px;right:-80px;background:rgba(82,183,136,0.09);"></div>
+  <div class="slide-inner">
+    <div class="slide-label"><span class="dot"></span> Business Model</div>
+    <h2>Freemium with<br><span class="grad">high-value Pro upgrade</span></h2>
+    <p style="max-width:520px;margin-bottom:36px;">Free tier drives organic acquisition. Pro converts power users who need the full AI toolkit to stay competitive in their job search.</p>
+
+    <div class="grid-2" style="margin-bottom:28px;gap:20px;">
+      <!-- Free -->
+      <div class="card" style="border-color:rgba(116,192,252,0.25);position:relative;">
+        <div style="font-size:11px;font-weight:700;color:#74C0FC;letter-spacing:0.10em;text-transform:uppercase;margin-bottom:12px;">Free Plan</div>
+        <div style="font-size:38px;font-weight:900;color:#E8F2E8;letter-spacing:-0.03em;margin-bottom:4px;">$0</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.35);margin-bottom:20px;">Forever free</div>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <div class="check-item"><span class="check-icon">✓</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">AI Job Search across 10 sources</span></div>
+          <div class="check-item"><span class="check-icon">✓</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">Application Pipeline Tracker</span></div>
+          <div class="check-item"><span class="check-icon">✓</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">Save & bookmark jobs</span></div>
+          <div class="check-item"><span class="check-icon">✓</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">Globe company explorer</span></div>
+        </div>
+      </div>
+
+      <!-- Pro -->
+      <div class="card" style="border-color:rgba(218,119,242,0.40);background:rgba(218,119,242,0.05);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;right:0;background:rgba(218,119,242,0.15);padding:4px 14px;border-radius:0 18px 0 12px;font-size:10px;font-weight:700;color:#DA77F2;letter-spacing:0.08em;">MOST POPULAR</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;">
+          <span style="font-size:11px;font-weight:700;color:#DA77F2;letter-spacing:0.10em;text-transform:uppercase;">Pro Plan</span>
+          <span style="font-size:10px;background:rgba(218,119,242,0.15);border:1px solid rgba(218,119,242,0.25);border-radius:20px;padding:2px 8px;color:#DA77F2;font-weight:700;">✦ AI Powered</span>
+        </div>
+        <div style="font-size:38px;font-weight:900;color:#DA77F2;letter-spacing:-0.03em;margin-bottom:4px;">$11.99</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.35);margin-bottom:20px;">per month · cancel anytime · 30-day money-back</div>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <div class="check-item"><span style="color:#DA77F2;font-size:16px;flex-shrink:0;">✦</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">Everything in Free</span></div>
+          <div class="check-item"><span style="color:#DA77F2;font-size:16px;flex-shrink:0;">✦</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">AI Match Scoring per job</span></div>
+          <div class="check-item"><span style="color:#DA77F2;font-size:16px;flex-shrink:0;">✦</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">AI Resume Tailoring (LaTeX export)</span></div>
+          <div class="check-item"><span style="color:#DA77F2;font-size:16px;flex-shrink:0;">✦</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">Cover Letter Generator</span></div>
+          <div class="check-item"><span style="color:#DA77F2;font-size:16px;flex-shrink:0;">✦</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">Full ATS Score & Optimizer</span></div>
+          <div class="check-item"><span style="color:#DA77F2;font-size:16px;flex-shrink:0;">✦</span><span style="font-size:13px;color:rgba(232,242,232,0.65);">Visa Sponsorship Filter</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Revenue projection -->
+    <div style="background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.18);border-radius:16px;padding:24px;">
+      <div style="font-size:12px;font-weight:700;color:rgba(232,242,232,0.35);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:16px;">Revenue Scenarios (Monthly Recurring Revenue)</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        <div style="text-align:center;">
+          <div style="font-size:11px;color:rgba(232,242,232,0.30);margin-bottom:6px;font-weight:600;text-transform:uppercase;">Conservative</div>
+          <div style="font-size:26px;font-weight:800;color:#52B788;">$12K</div>
+          <div style="font-size:11px;color:rgba(232,242,232,0.35);margin-top:4px;">~1,000 Pro users</div>
+        </div>
+        <div style="text-align:center;border-left:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);">
+          <div style="font-size:11px;color:rgba(232,242,232,0.30);margin-bottom:6px;font-weight:600;text-transform:uppercase;">Base Case</div>
+          <div style="font-size:26px;font-weight:800;color:#74C0FC;">$60K</div>
+          <div style="font-size:11px;color:rgba(232,242,232,0.35);margin-top:4px;">~5,000 Pro users</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:11px;color:rgba(232,242,232,0.30);margin-bottom:6px;font-weight:600;text-transform:uppercase;">Growth</div>
+          <div style="font-size:26px;font-weight:800;color:#DA77F2;">$240K</div>
+          <div style="font-size:11px;color:rgba(232,242,232,0.35);margin-top:4px;">~20,000 Pro users</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">06 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7 — MARKET OPPORTUNITY -->
+<!-- ============================================================ -->
+<section class="slide bg-dark" id="market">
+  <div class="orb" style="width:400px;height:400px;bottom:-80px;left:-100px;background:rgba(116,192,252,0.08);"></div>
+  <div class="slide-inner">
+    <div class="slide-label"><span class="dot"></span> Market Opportunity</div>
+    <h2>A massive,<br><span class="grad">underserved market</span></h2>
+    <p style="max-width:540px;margin-bottom:40px;">Over 1 billion people use job boards globally. AI-driven job search tools are still nascent — the winner takes the market before the incumbents can respond.</p>
+
+    <div class="grid-3" style="margin-bottom:28px;">
+      <div class="card card-green" style="text-align:center;padding:28px;">
+        <div class="stat-big" style="color:#52B788;">$28B</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Global Online<br>Recruitment Market</div>
+      </div>
+      <div class="card card-blue" style="text-align:center;padding:28px;">
+        <div class="stat-big" style="color:#74C0FC;">1B+</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Job Seekers<br>Globally per Year</div>
+      </div>
+      <div class="card card-purple" style="text-align:center;padding:28px;">
+        <div class="stat-big" style="color:#DA77F2;">32%</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">CAGR of AI<br>Recruiting Tools</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="gap:18px;">
+      <div class="card">
+        <h3 style="color:#52B788;margin-bottom:12px;">Why Now</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="check-item"><span class="check-icon">✓</span><span style="font-size:13px;color:rgba(232,242,232,0.60);">LLMs made AI resume parsing production-ready</span></div>
+          <div class="check-item"><span class="check-icon">✓</span><span style="font-size:13px;color:rgba(232,242,232,0.60);">Remote work expanded the global talent pool</span></div>
+          <div class="check-item"><span class="check-icon">✓</span><span style="font-size:13px;color:rgba(232,242,232,0.60);">Tech layoffs drove millions to the job market</span></div>
+          <div class="check-item"><span class="check-icon">✓</span><span style="font-size:13px;color:rgba(232,242,232,0.60);">Job boards are saturated — candidates need signal, not more noise</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:#74C0FC;margin-bottom:12px;">Competitive Landscape</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px;">
+            <span style="font-size:12px;color:rgba(232,242,232,0.55);">LinkedIn / Indeed</span>
+            <span class="badge" style="background:rgba(244,162,97,0.10);border:1px solid rgba(244,162,97,0.20);color:#F4A261;font-size:10px;">No AI matching</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px;">
+            <span style="font-size:12px;color:rgba(232,242,232,0.55);">Simplify / Teal</span>
+            <span class="badge" style="background:rgba(244,162,97,0.10);border:1px solid rgba(244,162,97,0.20);color:#F4A261;font-size:10px;">No multi-source search</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.15);border-radius:8px;">
+            <span style="font-size:12px;color:#52B788;font-weight:700;">WorkSearch</span>
+            <span class="badge" style="background:rgba(82,183,136,0.15);border:1px solid rgba(82,183,136,0.25);color:#52B788;font-size:10px;">Full stack AI platform</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">07 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8 — TECHNOLOGY -->
+<!-- ============================================================ -->
+<section class="slide bg-darker" id="tech">
+  <div class="orb" style="width:360px;height:360px;top:-60px;right:-80px;background:rgba(255,212,59,0.05);"></div>
+  <div class="slide-inner">
+    <div class="slide-label"><span class="dot"></span> Technology</div>
+    <h2>Built to<br><span class="grad">scale from day one</span></h2>
+    <p style="max-width:520px;margin-bottom:36px;">A production-grade stack — containerized, cloud-deployed, and AI-native — built by a solo founder.</p>
+
+    <div class="grid-2" style="gap:20px;margin-bottom:24px;">
+      <!-- Frontend -->
+      <div class="card card-blue">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(116,192,252,0.15);border:1px solid rgba(116,192,252,0.25);display:flex;align-items:center;justify-content:center;font-size:16px;">⚛️</div>
+          <h3 style="color:#74C0FC;">Frontend</h3>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">Next.js 15 (App Router)</span>
+            <span style="font-size:10px;color:#74C0FC;font-weight:700;">Framework</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">React + TypeScript</span>
+            <span style="font-size:10px;color:#74C0FC;font-weight:700;">UI</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">Clerk Authentication</span>
+            <span style="font-size:10px;color:#74C0FC;font-weight:700;">Auth</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">Vercel Edge Network</span>
+            <span style="font-size:10px;color:#74C0FC;font-weight:700;">Deploy</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">Stripe Checkout</span>
+            <span style="font-size:10px;color:#74C0FC;font-weight:700;">Payments</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div class="card card-green">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(82,183,136,0.15);border:1px solid rgba(82,183,136,0.25);display:flex;align-items:center;justify-content:center;font-size:16px;">🐍</div>
+          <h3 style="color:#52B788;">Backend & AI</h3>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">Python / FastAPI</span>
+            <span style="font-size:10px;color:#52B788;font-weight:700;">API</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">Embedding Matcher (semantic AI)</span>
+            <span style="font-size:10px;color:#52B788;font-weight:700;">AI Core</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">Skill Extractor + Domain Classifier</span>
+            <span style="font-size:10px;color:#52B788;font-weight:700;">AI Core</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">LLM ATS Scorer + Resume Writer</span>
+            <span style="font-size:10px;color:#52B788;font-weight:700;">AI Core</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:rgba(232,242,232,0.60);">Docker · Hugging Face Spaces</span>
+            <span style="font-size:10px;color:#52B788;font-weight:700;">Deploy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Architecture diagram -->
+    <div class="mockup-wrap">
+      <div class="mockup-bar">
+        <div class="mockup-dot" style="background:#ff5f57;"></div>
+        <div class="mockup-dot" style="background:#febc2e;"></div>
+        <div class="mockup-dot" style="background:#28c840;"></div>
+        <div style="flex:1;text-align:center;font-size:10px;color:rgba(232,242,232,0.20);font-weight:600;">System Architecture</div>
+      </div>
+      <div class="mockup-body">
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;">
+          <div style="background:rgba(116,192,252,0.10);border:1px solid rgba(116,192,252,0.20);border-radius:10px;padding:10px 16px;text-align:center;">
+            <div style="font-size:10px;color:#74C0FC;font-weight:700;margin-bottom:3px;">CLIENT</div>
+            <div style="font-size:11px;color:rgba(232,242,232,0.55);">Next.js / Vercel</div>
+          </div>
+          <div style="color:rgba(232,242,232,0.20);font-size:18px;">→</div>
+          <div style="background:rgba(82,183,136,0.10);border:1px solid rgba(82,183,136,0.20);border-radius:10px;padding:10px 16px;text-align:center;">
+            <div style="font-size:10px;color:#52B788;font-weight:700;margin-bottom:3px;">AUTH</div>
+            <div style="font-size:11px;color:rgba(232,242,232,0.55);">Clerk JWT</div>
+          </div>
+          <div style="color:rgba(232,242,232,0.20);font-size:18px;">→</div>
+          <div style="background:rgba(82,183,136,0.10);border:1px solid rgba(82,183,136,0.20);border-radius:10px;padding:10px 16px;text-align:center;">
+            <div style="font-size:10px;color:#52B788;font-weight:700;margin-bottom:3px;">API</div>
+            <div style="font-size:11px;color:rgba(232,242,232,0.55);">FastAPI / HF Spaces</div>
+          </div>
+          <div style="color:rgba(232,242,232,0.20);font-size:18px;">→</div>
+          <div style="background:rgba(218,119,242,0.10);border:1px solid rgba(218,119,242,0.20);border-radius:10px;padding:10px 16px;text-align:center;">
+            <div style="font-size:10px;color:#DA77F2;font-weight:700;margin-bottom:3px;">AI LAYER</div>
+            <div style="font-size:11px;color:rgba(232,242,232,0.55);">Embeddings · LLM</div>
+          </div>
+          <div style="color:rgba(232,242,232,0.20);font-size:18px;">→</div>
+          <div style="background:rgba(255,212,59,0.08);border:1px solid rgba(255,212,59,0.18);border-radius:10px;padding:10px 16px;text-align:center;">
+            <div style="font-size:10px;color:#FFD43B;font-weight:700;margin-bottom:3px;">SOURCES</div>
+            <div style="font-size:11px;color:rgba(232,242,232,0.55);">10 Job APIs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">08 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9 — TRACTION -->
+<!-- ============================================================ -->
+<section class="slide bg-dark" id="traction">
+  <div class="orb" style="width:380px;height:380px;bottom:-60px;right:-80px;background:rgba(82,183,136,0.09);"></div>
+  <div class="slide-inner">
+    <div class="slide-label"><span class="dot"></span> What We've Built</div>
+    <h2>Fully functional.<br><span class="grad">Ready to scale.</span></h2>
+    <p style="max-width:520px;margin-bottom:36px;">WorkSearch is a complete, production-ready platform — not a prototype. The infrastructure, AI pipeline, and monetization are live and working.</p>
+
+    <div class="grid-2" style="gap:20px;margin-bottom:24px;">
+      <div>
+        <h3 style="color:rgba(232,242,232,0.60);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;margin-bottom:14px;">Product Milestones</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.65);">10 live job sources integrated</span>
+          </div>
+          <div style="background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.65);">AI resume matching + scoring engine</span>
+          </div>
+          <div style="background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.65);">LLM ATS scorer + resume tailoring</span>
+          </div>
+          <div style="background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.65);">Cover letter generation</span>
+          </div>
+          <div style="background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.65);">Stripe billing + promo code system</span>
+          </div>
+          <div style="background:rgba(82,183,136,0.06);border:1px solid rgba(82,183,136,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.65);">Containerized & cloud deployed</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="color:rgba(232,242,232,0.60);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;margin-bottom:14px;">Roadmap</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(116,192,252,0.05);border:1px solid rgba(116,192,252,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🔜</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.55);">Auto-apply with AI-filled forms</span>
+          </div>
+          <div style="background:rgba(116,192,252,0.05);border:1px solid rgba(116,192,252,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🔜</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.55);">Interview prep & mock interview AI</span>
+          </div>
+          <div style="background:rgba(116,192,252,0.05);border:1px solid rgba(116,192,252,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🔜</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.55);">Email alerts for new matched jobs</span>
+          </div>
+          <div style="background:rgba(116,192,252,0.05);border:1px solid rgba(116,192,252,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🔜</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.55);">Team plan (recruiters & agencies)</span>
+          </div>
+          <div style="background:rgba(116,192,252,0.05);border:1px solid rgba(116,192,252,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🔜</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.55);">Mobile app (iOS & Android)</span>
+          </div>
+          <div style="background:rgba(116,192,252,0.05);border:1px solid rgba(116,192,252,0.15);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🔜</span>
+            <span style="font-size:13px;color:rgba(232,242,232,0.55);">B2B API for career platforms</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">09 / 10</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10 — THE ASK -->
+<!-- ============================================================ -->
+<section class="slide bg-darker" id="ask">
+  <div class="orb" style="width:600px;height:600px;top:-200px;left:-200px;background:rgba(82,183,136,0.10);"></div>
+  <div class="orb" style="width:400px;height:400px;bottom:-100px;right:-100px;background:rgba(218,119,242,0.07);"></div>
+  <div class="slide-inner" style="text-align:center;">
+    <div class="slide-label" style="margin:0 auto 24px;"><span class="dot"></span> The Ask</div>
+    <h2>Join us in<br><span class="grad">reshaping job search</span></h2>
+    <p style="max-width:540px;margin:0 auto 44px;font-size:16px;">
+      WorkSearch is live, AI-native, and ready to grow. We are raising a pre-seed round to accelerate user acquisition, expand our AI capabilities, and build toward the future of intelligent hiring.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:680px;margin:0 auto 40px;">
+      <div class="card card-green" style="text-align:center;padding:24px;">
+        <div style="font-size:26px;font-weight:900;color:#52B788;margin-bottom:6px;">Marketing</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:4px;line-height:1.5;">Paid acquisition, SEO, community growth</div>
+      </div>
+      <div class="card card-purple" style="text-align:center;padding:24px;">
+        <div style="font-size:26px;font-weight:900;color:#DA77F2;margin-bottom:6px;">AI R&D</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:4px;line-height:1.5;">Better models, auto-apply, interview AI</div>
+      </div>
+      <div class="card card-blue" style="text-align:center;padding:24px;">
+        <div style="font-size:26px;font-weight:900;color:#74C0FC;margin-bottom:6px;">Team</div>
+        <div style="font-size:12px;color:rgba(232,242,232,0.40);margin-top:4px;line-height:1.5;">Hire first engineer & growth hacker</div>
+      </div>
+    </div>
+
+    <!-- Final mockup -->
+    <div class="mockup-wrap" style="max-width:600px;margin:0 auto 36px;">
+      <div class="mockup-bar">
+        <div class="mockup-dot" style="background:#ff5f57;"></div>
+        <div class="mockup-dot" style="background:#febc2e;"></div>
+        <div class="mockup-dot" style="background:#28c840;"></div>
+        <div style="flex:1;text-align:center;font-size:10px;color:rgba(232,242,232,0.20);font-weight:600;">worksearch.app/dashboard · Live Product</div>
+      </div>
+      <div class="mockup-body">
+        <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+          <div style="text-align:center;padding:14px 20px;background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.20);border-radius:12px;">
+            <div style="font-size:22px;font-weight:800;color:#52B788;">10+</div>
+            <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Job Sources</div>
+          </div>
+          <div style="text-align:center;padding:14px 20px;background:rgba(116,192,252,0.08);border:1px solid rgba(116,192,252,0.20);border-radius:12px;">
+            <div style="font-size:22px;font-weight:800;color:#74C0FC;">6</div>
+            <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">AI Modules</div>
+          </div>
+          <div style="text-align:center;padding:14px 20px;background:rgba(218,119,242,0.08);border:1px solid rgba(218,119,242,0.20);border-radius:12px;">
+            <div style="font-size:22px;font-weight:800;color:#DA77F2;">$11.99</div>
+            <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Pro / Month</div>
+          </div>
+          <div style="text-align:center;padding:14px 20px;background:rgba(255,212,59,0.08);border:1px solid rgba(255,212,59,0.20);border-radius:12px;">
+            <div style="font-size:22px;font-weight:800;color:#FFD43B;">Live</div>
+            <div style="font-size:10px;color:rgba(232,242,232,0.35);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Production Ready</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 24px;font-size:13px;color:rgba(232,242,232,0.50);">
+        Built by <span style="color:#52B788;font-weight:700;">Anurag</span>
+      </div>
+      <div style="background:rgba(82,183,136,0.10);border:1px solid rgba(82,183,136,0.25);border-radius:12px;padding:12px 24px;font-size:13px;color:#52B788;font-weight:600;">
+        anuraghragidimilli@icloud.com
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">10 / 10</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#060d08;border-top:1px solid rgba(82,183,136,0.10);padding:24px 40px;text-align:center;">
+  <div style="font-size:14px;font-weight:800;color:#52B788;margin-bottom:6px;">WorkSearch</div>
+  <div style="font-size:11px;color:rgba(232,242,232,0.20);">AI-Powered Job Search · Confidential Investor Deck · 2026</div>
+</footer>
+
+<script>
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault()
+      const target = document.querySelector(a.getAttribute('href'))
+      if (target) target.scrollIntoView({ behavior: 'smooth' })
+    })
+  })
+</script>
+</body>
+</html>
