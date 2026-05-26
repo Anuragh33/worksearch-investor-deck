@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="1280" height="420" role="img" aria-label="WorkSearch — an AI workspace for the modern job hunt">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B4332"></stop>
+      <stop offset="0.38" stop-color="#2D6A4F"></stop>
+      <stop offset="0.72" stop-color="#40916C"></stop>
+      <stop offset="1" stop-color="#95D5B2"></stop>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"></stop>
+      <stop offset="1" stop-color="#F5F7F2"></stop>
+    </linearGradient>
+    <pattern id="dots" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#F5F7F2" opacity="0.18"></circle>
+    </pattern>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#000000" flood-opacity="0.32"></feDropShadow>
+    </filter>
+    <clipPath id="cardClip">
+      <rect x="0" y="0" width="440" height="430" rx="14"></rect>
+    </clipPath>
+  </defs>
+
+  
+  <rect width="1280" height="420" fill="url(#bg)"></rect>
+  <rect width="1280" height="420" fill="url(#dots)"></rect>
+
+  
+  <g font-family="ui-monospace, &#39;JetBrains Mono&#39;, SFMono-Regular, Menlo, monospace" fill="#F5F7F2">
+    
+    <g transform="translate(60,60)">
+      <rect x="0" y="0" width="148" height="28" rx="14" fill="#F5F7F2" fill-opacity="0.13" stroke="#F5F7F2" stroke-opacity="0.28"></rect>
+      <circle cx="14" cy="14" r="3.5" fill="#95D5B2"></circle>
+      <text x="26" y="18" font-size="10.5" letter-spacing="3" fill="#F5F7F2" font-weight="600">V4.0.0 · NEW</text>
+    </g>
+  </g>
+
+  
+  <text x="60" y="190" font-family="&#39;Fraunces&#39;, Georgia, &#39;Times New Roman&#39;, serif" font-size="84" font-weight="500" fill="#F5F7F2" letter-spacing="-2.5">WorkSearch</text>
+
+  
+  <text x="60" y="232" font-family="-apple-system, &#39;Segoe UI&#39;, Helvetica, Arial, sans-serif" font-size="17" fill="#F5F7F2" fill-opacity="0.86">
+    <tspan x="60" dy="0">An AI workspace for the modern job hunt — parses your résumé,</tspan>
+    <tspan x="60" dy="22">scans six portals, scores every match, and drafts the application.</tspan>
+  </text>
+
+  
+  <g transform="translate(60,300)" font-family="-apple-system, &#39;Segoe UI&#39;, Helvetica, Arial, sans-serif" font-size="13" font-weight="600">
+    <g>
+      <rect x="0" y="0" width="148" height="40" rx="8" fill="#F5F7F2"></rect>
+      <text x="74" y="26" text-anchor="middle" fill="#1B4332">→ Live demo</text>
+    </g>
+    <g transform="translate(160,0)">
+      <rect x="0" y="0" width="100" height="40" rx="8" fill="none" stroke="#F5F7F2" stroke-opacity="0.4"></rect>
+      <text x="50" y="26" text-anchor="middle" fill="#F5F7F2">Docs</text>
+    </g>
+  </g>
+
+  
+  <g transform="translate(820,40) rotate(-4 220 215)" filter="url(#cardShadow)">
+    <g clip-path="url(#cardClip)">
+      <rect x="0" y="0" width="440" height="430" rx="14" fill="url(#card)"></rect>
+
+      
+      <g transform="translate(14,14)">
+        <circle cx="5" cy="5" r="5" fill="#FFAFA3"></circle>
+        <circle cx="20" cy="5" r="5" fill="#FFD78D"></circle>
+        <circle cx="35" cy="5" r="5" fill="#A8E0BD"></circle>
+        <text x="56" y="9" font-family="ui-monospace, &#39;JetBrains Mono&#39;, Menlo, monospace" font-size="10" fill="#6B8A6B" letter-spacing="1">worksearch.app/dashboard</text>
+      </g>
+
+      
+      <g transform="translate(14,38)">
+        <g>
+          <rect x="0" y="0" width="135" height="56" rx="8" fill="#FFFFFF" stroke="#1A2A1A" stroke-opacity="0.08"></rect>
+          <text x="12" y="28" font-family="ui-monospace, &#39;JetBrains Mono&#39;, Menlo, monospace" font-size="18" font-weight="700" fill="#2D6A4F">142</text>
+          <text x="12" y="46" font-family="-apple-system, Helvetica, sans-serif" font-size="9" letter-spacing="0.8" fill="#6B8A6B">MATCHES</text>
+        </g>
+        <g transform="translate(139,0)">
+          <rect x="0" y="0" width="135" height="56" rx="8" fill="#FFFFFF" stroke="#1A2A1A" stroke-opacity="0.08"></rect>
+          <text x="12" y="28" font-family="ui-monospace, &#39;JetBrains Mono&#39;, Menlo, monospace" font-size="18" font-weight="700" fill="#4A7FA5">28</text>
+          <text x="12" y="46" font-family="-apple-system, Helvetica, sans-serif" font-size="9" letter-spacing="0.8" fill="#6B8A6B">APPLIED</text>
+        </g>
+        <g transform="translate(278,0)">
+          <rect x="0" y="0" width="135" height="56" rx="8" fill="#FFFFFF" stroke="#1A2A1A" stroke-opacity="0.08"></rect>
+          <text x="12" y="28" font-family="ui-monospace, &#39;JetBrains Mono&#39;, Menlo, monospace" font-size="18" font-weight="700" fill="#C49A2C">6</text>
+          <text x="12" y="46" font-family="-apple-system, Helvetica, sans-serif" font-size="9" letter-spacing="0.8" fill="#6B8A6B">INTERVIEW</text>
+        </g>
+      </g>
+
+      
+      <g transform="translate(14,108)" font-family="-apple-system, Helvetica, sans-serif">
+        
+        <g>
+          <rect x="0" y="0" width="413" height="46" rx="8" fill="#FFFFFF" stroke="#1A2A1A" stroke-opacity="0.08"></rect>
+          <rect x="10" y="11" width="24" height="24" rx="6" fill="#DDE9F2"></rect>
+          <text x="22" y="28" text-anchor="middle" font-family="&#39;Fraunces&#39;, Georgia, serif" font-size="12" font-weight="600" fill="#1E3D5C">L</text>
+          <text x="44" y="20" font-size="11.5" font-weight="600" fill="#1A2A1A">Senior Product Designer</text>
+          <text x="44" y="35" font-size="9.5" fill="#6B8A6B">Linear · Remote</text>
+          <rect x="362" y="14" width="40" height="18" rx="9" fill="#2D6A4F" fill-opacity="0.15" stroke="#2D6A4F" stroke-opacity="0.4"></rect>
+          <text x="382" y="26" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="700" fill="#2D6A4F">94</text>
+        </g>
+        <g transform="translate(0,52)">
+          <rect x="0" y="0" width="413" height="46" rx="8" fill="#FFFFFF" stroke="#1A2A1A" stroke-opacity="0.08"></rect>
+          <rect x="10" y="11" width="24" height="24" rx="6" fill="#E8E3F2"></rect>
+          <text x="22" y="28" text-anchor="middle" font-family="&#39;Fraunces&#39;, Georgia, serif" font-size="12" font-weight="600" fill="#3D2F70">V</text>
+          <text x="44" y="20" font-size="11.5" font-weight="600" fill="#1A2A1A">Software Engineer, Frontend</text>
+          <text x="44" y="35" font-size="9.5" fill="#6B8A6B">Vercel · Remote</text>
+          <rect x="362" y="14" width="40" height="18" rx="9" fill="#2D6A4F" fill-opacity="0.15" stroke="#2D6A4F" stroke-opacity="0.4"></rect>
+          <text x="382" y="26" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="700" fill="#2D6A4F">91</text>
+        </g>
+        <g transform="translate(0,104)">
+          <rect x="0" y="0" width="413" height="46" rx="8" fill="#FFFFFF" stroke="#1A2A1A" stroke-opacity="0.08"></rect>
+          <rect x="10" y="11" width="24" height="24" rx="6" fill="#F8E8D4"></rect>
+          <text x="22" y="28" text-anchor="middle" font-family="&#39;Fraunces&#39;, Georgia, serif" font-size="12" font-weight="600" fill="#6B4010">S</text>
+          <text x="44" y="20" font-size="11.5" font-weight="600" fill="#1A2A1A">Design Engineer</text>
+          <text x="44" y="35" font-size="9.5" fill="#6B8A6B">Stripe · Remote</text>
+          <rect x="362" y="14" width="40" height="18" rx="9" fill="#C49A2C" fill-opacity="0.15" stroke="#C49A2C" stroke-opacity="0.4"></rect>
+          <text x="382" y="26" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="700" fill="#7A5C10">87</text>
+        </g>
+        <g transform="translate(0,156)">
+          <rect x="0" y="0" width="413" height="46" rx="8" fill="#FFFFFF" stroke="#1A2A1A" stroke-opacity="0.08"></rect>
+          <rect x="10" y="11" width="24" height="24" rx="6" fill="#D8EEE6"></rect>
+          <text x="22" y="28" text-anchor="middle" font-family="&#39;Fraunces&#39;, Georgia, serif" font-size="12" font-weight="600" fill="#1B4332">N</text>
+          <text x="44" y="20" font-size="11.5" font-weight="600" fill="#1A2A1A">Senior Frontend Engineer</text>
+          <text x="44" y="35" font-size="9.5" fill="#6B8A6B">Notion · Hybrid · NYC</text>
+          <rect x="362" y="14" width="40" height="18" rx="9" fill="#C49A2C" fill-opacity="0.15" stroke="#C49A2C" stroke-opacity="0.4"></rect>
+          <text x="382" y="26" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="700" fill="#7A5C10">82</text>
+        </g>
+        <g transform="translate(0,208)">
+          <rect x="0" y="0" width="413" height="46" rx="8" fill="#FFFFFF" stroke="#1A2A1A" stroke-opacity="0.08"></rect>
+          <rect x="10" y="11" width="24" height="24" rx="6" fill="#F7EDCF"></rect>
+          <text x="22" y="28" text-anchor="middle" font-family="&#39;Fraunces&#39;, Georgia, serif" font-size="12" font-weight="600" fill="#7A5C10">F</text>
+          <text x="44" y="20" font-size="11.5" font-weight="600" fill="#1A2A1A">Staff Design Engineer</text>
+          <text x="44" y="35" font-size="9.5" fill="#6B8A6B">Figma · SF</text>
+          <rect x="362" y="14" width="40" height="18" rx="9" fill="#C49A2C" fill-opacity="0.15" stroke="#C49A2C" stroke-opacity="0.4"></rect>
+          <text x="382" y="26" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="700" fill="#7A5C10">78</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
